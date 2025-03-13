@@ -1,4 +1,4 @@
-# Project Minigames
+# Project MiniGames
 This is a web app that has a library of mini games that allow you to enjoy classic games like tic-tac-toe, snake, hangman, and many more. The aim is to provide a simple but fun user interface to pass time and to have fun. Key features of this web app include a home screen with different game selection, a simple score tracker, user-friendly design,n and controls. Another potential feature would be the ability to have multiple players on games like tic-tac-toe.
 Adding an screenshot or a mockup of your application in action would be nice.  
 

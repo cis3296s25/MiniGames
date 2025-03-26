@@ -8,7 +8,7 @@ function App() {
   const [game, setGame] = useState(null);
   return (
     <div className="App">
-      <h1>MiniGames App</h1>
+      <h1>MiniGames</h1>
       {game === null ? (
         <div>
           <button onClick={() => setGame('ticTacToe')}>Tic-Tac-Toe</button>

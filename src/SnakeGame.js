@@ -16,7 +16,12 @@ const GameState = () => {
     { x: 95, y: 50 },
   ]);
   const [direction, setDirection] = useState(null);
-
+  const directionMap = {
+    ArrowRight: "right",
+    ArrowLeft: "left",
+    ArrowUp: "up",
+    ArrowDown: "down"
+  };
   const canvasRef = useRef(null);
 
   // Handle game over state
@@ -153,30 +158,35 @@ const GameState = () => {
             Math.floor((Math.random() * canvas.height) / SNAKE_SPEED) *
             SNAKE_SPEED,
         });
-
-        newSnake.push({
-          x: newSnake[newSnake.length - 1].x,
-          y: newSnake[newSnake.length - 1].y,
-        });
+        const newLength = 3;
+        for (let i = 0; i < newLength; i++) {
+          newSnake.push({
+            x: newSnake[newSnake.length - 1].x,
+            y: newSnake[newSnake.length - 1].y,
+          });
+        }
       }
     };
 
     const handleKeyPress = (e) => {
-      switch (e.key) {
-        case "ArrowRight":
-          setDirection("right");
-          break;
-        case "ArrowLeft":
-          setDirection("left");
-          break;
-        case "ArrowUp":
-          setDirection("up");
-          break;
-        case "ArrowDown":
-          setDirection("down");
-          break;
+      const newDirection = directionMap[e.key];
+      if (newDirection && newDirection !== getOppositeDirection(direction)) {
+        setDirection(newDirection);
+      }
+    };
+
+    const getOppositeDirection = (currentDirection) => {
+      switch (currentDirection) {
+        case "right":
+          return "left";
+        case "left":
+          return "right";
+        case "up":
+          return "down";
+        case "down":
+          return "up";
         default:
-          break;
+          return null;
       }
     };
 

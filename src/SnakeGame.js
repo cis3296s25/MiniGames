@@ -153,32 +153,35 @@ const GameState = () => {
             Math.floor((Math.random() * canvas.height) / SNAKE_SPEED) *
             SNAKE_SPEED,
         });
-
-        newSnake.push({
-          x: newSnake[newSnake.length - 1].x,
-          y: newSnake[newSnake.length - 1].y,
-        });
+        const newLength = 3;
+        for (let i = 0; i < newLength; i++) {
+          newSnake.push({
+            x: newSnake[newSnake.length - 1].x,
+            y: newSnake[newSnake.length - 1].y,
+          });
+        }
       }
     };
 
     const handleKeyPress = (e) => {
       switch (e.key) {
         case "ArrowRight":
-          setDirection("right");
+          if (direction !== "left") setDirection("right");
           break;
         case "ArrowLeft":
-          setDirection("left");
+          if (direction !== "right") setDirection("left");
           break;
         case "ArrowUp":
-          setDirection("up");
+          if (direction !== "down") setDirection("up");
           break;
         case "ArrowDown":
-          setDirection("down");
+          if (direction !== "up") setDirection("down");
           break;
         default:
           break;
       }
     };
+
 
     window.addEventListener("keydown", handleKeyPress);
 

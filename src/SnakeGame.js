@@ -16,7 +16,12 @@ const GameState = () => {
     { x: 95, y: 50 },
   ]);
   const [direction, setDirection] = useState(null);
-
+  const directionMap = {
+    ArrowRight: "right",
+    ArrowLeft: "left",
+    ArrowUp: "up",
+    ArrowDown: "down"
+  };
   const canvasRef = useRef(null);
 
   // Handle game over state
@@ -164,24 +169,26 @@ const GameState = () => {
     };
 
     const handleKeyPress = (e) => {
-      switch (e.key) {
-        case "ArrowRight":
-          if (direction !== "left") setDirection("right");
-          break;
-        case "ArrowLeft":
-          if (direction !== "right") setDirection("left");
-          break;
-        case "ArrowUp":
-          if (direction !== "down") setDirection("up");
-          break;
-        case "ArrowDown":
-          if (direction !== "up") setDirection("down");
-          break;
-        default:
-          break;
+      const newDirection = directionMap[e.key];
+      if (newDirection && newDirection !== getOppositeDirection(direction)) {
+        setDirection(newDirection);
       }
     };
 
+    const getOppositeDirection = (currentDirection) => {
+      switch (currentDirection) {
+        case "right":
+          return "left";
+        case "left":
+          return "right";
+        case "up":
+          return "down";
+        case "down":
+          return "up";
+        default:
+          return null;
+      }
+    };
 
     window.addEventListener("keydown", handleKeyPress);
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Snakegame.css";
 
-const GameState = () => {
+const GameState = ({setGame}) => {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(
     parseInt(localStorage.getItem("highScore")) || 0
@@ -213,6 +213,7 @@ const GameState = () => {
         <div className="game-over">
           <p>Game Over! {collisionType === "wall" ? "You Hit the wall" : "You Ate yourself"}!</p>
           <p>Press Enter to reset the game.</p>
+          <button onClick={() => setGame(null)}>Back to MiniGames</button>
         </div>
       )}
       {!gameOver && (

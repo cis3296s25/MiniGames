@@ -15,9 +15,9 @@ function App() {
           <button onClick={() => setGame('snake')}>Snake</button>
         </div>
       ) : game === 'ticTacToe' ? (
-        <TicTacToe />
+        <TicTacToe setGame={setGame}/>
       ) : (
-        <SnakeGame />
+        <SnakeGame setGame={setGame}/>
       )}
     </div>
   );

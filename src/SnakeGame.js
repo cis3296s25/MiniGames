@@ -71,7 +71,7 @@ const GameState = () => {
     const drawSnake = () => {
       snake.forEach((snakePart) => {
         ctx.beginPath();
-        ctx.rect(snakePart.x, snakePart.y, 14, 14);
+        ctx.rect(snakePart.x, snakePart.y, 8, 8);
         ctx.fillStyle = "#90EE90";
         ctx.fill();
         ctx.closePath();
@@ -80,7 +80,7 @@ const GameState = () => {
 
     const drawApple = () => {
       ctx.beginPath();
-      ctx.rect(apple.x, apple.y, 14, 14);
+      ctx.rect(apple.x, apple.y, 8, 8);
       ctx.fillStyle = "#FF0000";
       ctx.fill();
       ctx.closePath();

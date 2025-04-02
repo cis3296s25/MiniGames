@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./TicTacToe.css";
 const TicTacToe = ({setGame}) => {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -37,6 +37,22 @@ const TicTacToe = ({setGame}) => {
 
   const winner = calculateWinner(board);
 
+  const resetGame = () => {
+    setBoard(Array(9).fill(null));
+    setIsXNext(false);
+  }
+  useEffect(() =>{
+    const handleKeyPress = (event) =>{
+      if(event.key === 'Enter'){
+        resetGame();
+      }
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return ()=>{
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
   return (
     <div>
       <h2>Tic-Tac-Toe</h2>
@@ -52,6 +68,7 @@ const TicTacToe = ({setGame}) => {
         ))}
       </div>
       {winner && <p>Winner: {winner}</p>}
+      <p>Press Enter to restart!</p>
       <button onClick={() => setGame(null)}>Back to MiniGames</button>
     </div>
   );

@@ -9,7 +9,7 @@ import { showNotification as show, checkWin } from './Hangman Build/Helpers';
 
 import './Hangman.css';
 
-const words = ['application', 'programming', 'interface', 'wizard'];
+const words = ['application', 'programming', 'interface', 'wizard', 'hall', 'salt', 'cushion', 'scientific', 'partner', 'acrid', 'crowd', 'detail', 'subdue', 'needle', 'squirrel', 'unruly', 'narrow', 'preserve', 'clever', 'shave', 'rinse', 'nest', 'quarter', 'ripe', 'paddle', 'obedient', 'precious'];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
 function Hangman() {

@@ -24,3 +24,11 @@
     background-color: #ecf0f1;
     border: 3px solid #bdc3d9;
   }
+
+  .instructions {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 3px solid #bdc3d9;
+    padding: 8px;
+  }

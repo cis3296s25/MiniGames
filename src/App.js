@@ -3,6 +3,7 @@ import './App.css';
 import React, { useState } from 'react';
 import TicTacToe from "./TicTacToe";
 import SnakeGame from "./SnakeGame";
+import Hangman from "./Hangman"
 
 function App() {
   const [game, setGame] = useState(null);
@@ -13,11 +14,14 @@ function App() {
         <div>
           <button onClick={() => setGame('ticTacToe')}>Tic-Tac-Toe</button>
           <button onClick={() => setGame('snake')}>Snake</button>
+          <button onClick={() => setGame('hangman')}>Hangman</button>
         </div>
       ) : game === 'ticTacToe' ? (
         <TicTacToe />
-      ) : (
+      ) : game === 'snake' ? (
         <SnakeGame />
+      ) : (
+        <Hangman />
       )}
     </div>
   );

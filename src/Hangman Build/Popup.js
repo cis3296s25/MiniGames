@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { checkWin } from '../helpers/helpers';
+import { checkWin } from '../Hangman Build/Helpers';
 
 const Popup = ({correctLetters, wrongLetters, selectedWord, setPlayable, playAgain}) => {
   let finalMessage = '';

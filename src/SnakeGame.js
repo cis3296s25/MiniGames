@@ -218,6 +218,12 @@ const GameState = ({setGame}) => {
 
   return (
     <div className="game-container">
+      <div className="instructions">
+        <h3>How to Play</h3>
+        <p>To start, press any arrow key</p>
+        <p>Eat apples for snake to grow</p>
+        <p>Don't hit the wall or eat yourself</p>
+      </div>
       <p className="score">Score: {score}</p>
       <p className="high-score">High Score: {highScore}</p>
       {gameOver && (

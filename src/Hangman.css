@@ -1,34 +1,7 @@
-* {
-    box-sizing: border-box;
-  }
-  
-  body, #root {
-    background-color: #34495e;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 80vh;
-    margin: 0;
-    overflow: hidden;
-  }
-  
-  h1 {
-    margin: 20px 0 0;
-  }
-  
-  .game-container {
-    padding: 20px 30px;
-    position: relative;
-    margin: auto;
-    height: 350px;
-    width: 450px;
-  }
-  
+/* Hangman.css */ 
   .figure-container {
     fill: transparent;
-    stroke: #fff;
+    stroke: #000000;
     stroke-width: 4px;
     stroke-linecap: round;
   }
@@ -39,8 +12,8 @@
   
   .wrong-letters-container {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 50px;
+    right: 50px;
     display: flex;
     flex-direction: column;
     text-align: right;

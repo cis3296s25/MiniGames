@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Snakegame.css";
 
-const GameState = () => {
+const GameState = ({setGame}) => {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(
     parseInt(localStorage.getItem("highScore")) || 0
@@ -71,16 +71,26 @@ const GameState = () => {
     const drawSnake = () => {
       snake.forEach((snakePart) => {
         ctx.beginPath();
-        ctx.rect(snakePart.x, snakePart.y, 14, 14);
+        ctx.rect(snakePart.x, snakePart.y, 10, 10);
         ctx.fillStyle = "#90EE90";
         ctx.fill();
         ctx.closePath();
       });
     };
 
+    const drawBackground = (ctx, canvas) => {
+      const grid = 10;
+      for (let x = 0; x < canvas.width; x += grid) {
+        for (let y = 0; y < canvas.height; y += grid) {
+          ctx.fillStyle= ( x / grid + y/grid ) % 2 === 0 ?  "#e9eced" : "#f3f4f6";
+          ctx.fillRect(x, y, grid, grid);
+        }
+      }
+    }
+
     const drawApple = () => {
       ctx.beginPath();
-      ctx.rect(apple.x, apple.y, 14, 14);
+      ctx.rect(apple.x, apple.y, 10, 10);
       ctx.fillStyle = "#FF0000";
       ctx.fill();
       ctx.closePath();
@@ -194,6 +204,7 @@ const GameState = () => {
 
     const interval = setInterval(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawBackground(ctx, canvas);
       drawSnake();
       drawApple();
       moveSnake();
@@ -207,12 +218,19 @@ const GameState = () => {
 
   return (
     <div className="game-container">
+      <div className="instructions">
+        <h3>How to Play</h3>
+        <p>To start, press any arrow key</p>
+        <p>Eat apples for snake to grow</p>
+        <p>Don't hit the wall or eat yourself</p>
+      </div>
       <p className="score">Score: {score}</p>
       <p className="high-score">High Score: {highScore}</p>
       {gameOver && (
         <div className="game-over">
           <p>Game Over! {collisionType === "wall" ? "You Hit the wall" : "You Ate yourself"}!</p>
           <p>Press Enter to reset the game.</p>
+          <button onClick={() => setGame(null)}>Back to MiniGames</button>
         </div>
       )}
       {!gameOver && (

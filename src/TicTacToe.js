@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./TicTacToe.css";
-const TicTacToe = () => {
+const TicTacToe = ({setGame}) => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
 
@@ -52,6 +52,7 @@ const TicTacToe = () => {
         ))}
       </div>
       {winner && <p>Winner: {winner}</p>}
+      <button onClick={() => setGame(null)}>Back to MiniGames</button>
     </div>
   );
 };

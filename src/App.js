@@ -17,11 +17,11 @@ function App() {
           <button onClick={() => setGame('hangman')}>Hangman</button>
         </div>
       ) : game === 'ticTacToe' ? (
-        <TicTacToe />
+        <TicTacToe setGame={setGame}/>
       ) : game === 'snake' ? (
-        <SnakeGame />
+        <SnakeGame setGame={setGame}/>
       ) : (
-        <Hangman />
+        <Hangman setGame={setGame}/>
       )}
     </div>
   );

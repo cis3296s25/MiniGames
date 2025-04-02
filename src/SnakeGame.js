@@ -71,16 +71,26 @@ const GameState = ({setGame}) => {
     const drawSnake = () => {
       snake.forEach((snakePart) => {
         ctx.beginPath();
-        ctx.rect(snakePart.x, snakePart.y, 8, 8);
+        ctx.rect(snakePart.x, snakePart.y, 10, 10);
         ctx.fillStyle = "#90EE90";
         ctx.fill();
         ctx.closePath();
       });
     };
 
+    const drawBackground = (ctx, canvas) => {
+      const grid = 10;
+      for (let x = 0; x < canvas.width; x += grid) {
+        for (let y = 0; y < canvas.height; y += grid) {
+          ctx.fillStyle= ( x / grid + y/grid ) % 2 === 0 ?  "#e9eced" : "#f3f4f6";
+          ctx.fillRect(x, y, grid, grid);
+        }
+      }
+    }
+
     const drawApple = () => {
       ctx.beginPath();
-      ctx.rect(apple.x, apple.y, 8, 8);
+      ctx.rect(apple.x, apple.y, 10, 10);
       ctx.fillStyle = "#FF0000";
       ctx.fill();
       ctx.closePath();
@@ -194,6 +204,7 @@ const GameState = ({setGame}) => {
 
     const interval = setInterval(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawBackground(ctx, canvas);
       drawSnake();
       drawApple();
       moveSnake();

@@ -9,9 +9,9 @@ function App() {
   const [game, setGame] = useState(null);
   return (
     <div className="App">
-      <h1>MiniGames</h1>
       {game === null ? (
         <div>
+          <h1>MiniGames</h1>
           <button onClick={() => setGame('ticTacToe')}>Tic-Tac-Toe</button>
           <button onClick={() => setGame('snake')}>Snake</button>
           <button onClick={() => setGame('hangman')}>Hangman</button>

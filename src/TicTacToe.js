@@ -39,7 +39,7 @@ const TicTacToe = ({setGame}) => {
 
   const resetGame = () => {
     setBoard(Array(9).fill(null));
-    setIsXNext(false);
+    setIsXNext(true);
   }
   useEffect(() =>{
     const handleKeyPress = (event) =>{

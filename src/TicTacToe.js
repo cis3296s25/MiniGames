@@ -44,6 +44,7 @@ const TicTacToe = ({setGame}) => {
   useEffect(() =>{
     const handleKeyPress = (event) =>{
       if(event.key === 'Enter'){
+        event.preventDefault();
         resetGame();
       }
     };

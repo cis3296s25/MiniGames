@@ -88,7 +88,7 @@ const TicTacToe = ({setGame}) => {
         </div>
       </div>
 
-      <button className="tic-tac-toe-button" onClick={() => setGame(null)}>Back to MiniGames</button>
+      <button className="back-button" onClick={() => setGame(null)}>Back to MiniGames</button>
     </div>
   );
 };

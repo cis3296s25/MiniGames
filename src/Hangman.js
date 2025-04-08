@@ -12,7 +12,7 @@ import './Hangman.css';
 const words = ['application', 'programming', 'interface', 'wizard', 'hall', 'salt', 'cushion', 'scientific', 'partner', 'acrid', 'crowd', 'detail', 'subdue', 'needle', 'squirrel', 'unruly', 'narrow', 'preserve', 'clever', 'shave', 'rinse', 'nest', 'quarter', 'ripe', 'paddle', 'obedient', 'precious'];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
-function Hangman() {
+function Hangman({setGame}) {
   const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
@@ -64,6 +64,7 @@ function Hangman() {
       </div>
       <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} />
       <Notification showNotification={showNotification} />
+      <button className="back-button" onClick={() => setGame(null)}>Back to MiniGames</button>
     </>
   );
 }

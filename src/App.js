@@ -25,9 +25,9 @@ function App() {
       {game === null ? (
         <div>
           <h1>MiniGames</h1>
-          <button onClick={() => play_TicTacToe("ticTacToe")}>Tic-Tac-Toe</button>
-          <button onClick={() => play_Snake("snake")}>Snake</button>
-          <button onClick={() => play_Hangman("hangman")}>Hangman</button>
+          <button className="select-button" onClick={() => play_TicTacToe("ticTacToe")}>Tic-Tac-Toe</button>
+          <button className="select-button" onClick={() => play_Snake("snake")}>Snake</button>
+          <button className="select-button" onClick={() => play_Hangman("hangman")}>Hangman</button>
         </div>
       ) : game === 'ticTacToe' ? (
         <TicTacToe setGame={setGame}/>

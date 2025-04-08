@@ -3,6 +3,8 @@ import "./TicTacToe.css";
 const TicTacToe = ({setGame}) => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
+  const [xScore, setXscore] = useState(0);
+  const [oScore, setOscore] = useState(0);
 
   const handleClick = (index) => {
     if (board[index] || calculateWinner(board)) return;
@@ -38,9 +40,16 @@ const TicTacToe = ({setGame}) => {
   const winner = calculateWinner(board);
 
   const resetGame = () => {
+    if(winner){
+      if(winner === 'X'){
+        setXscore(xScore + 1);
+      }else if(winner === 'O'){
+        setOscore(oScore + 1);
+      }
+    }
     setBoard(Array(9).fill(null));
     setIsXNext(true);
-  }
+  };
   useEffect(() =>{
     const handleKeyPress = (event) =>{
       if(event.key === 'Enter'){
@@ -52,10 +61,10 @@ const TicTacToe = ({setGame}) => {
     return ()=>{
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, []);
+  }, [winner]);
 
   return (
-    <div>
+    <div className="tic-tac-toe-container">
       <h2>Tic-Tac-Toe</h2>
       <div className="board">
         {board.map((value, index) => (
@@ -70,7 +79,16 @@ const TicTacToe = ({setGame}) => {
       </div>
       {winner && <p>Winner: {winner}</p>}
       <p>Press Enter to restart!</p>
-      <button onClick={() => setGame(null)}>Back to MiniGames</button>
+      
+      <div>
+        <h3>Scores:</h3>
+        <div className="scoreboard">
+          <p>X: {xScore}</p>
+          <p>O: {oScore}</p>
+        </div>
+      </div>
+
+      <button className="tic-tac-toe-button" onClick={() => setGame(null)}>Back to MiniGames</button>
     </div>
   );
 };

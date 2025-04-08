@@ -226,7 +226,7 @@ const GameState = ({setGame}) => {
       </div>
       <p className="score">Score: {score}</p>
       <p className="high-score">High Score: {highScore}</p>
-      <button onClick={() => setGame(null)}>Back to MiniGames</button>
+      <button className="back-button" onClick={() => setGame(null)}>Back to MiniGames</button>
       {gameOver && (
         <div className="game-over">
           <p>Game Over! {collisionType === "wall" ? "You Hit the wall" : "You Ate yourself"}!</p>

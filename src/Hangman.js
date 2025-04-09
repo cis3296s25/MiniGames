@@ -5,6 +5,7 @@ import WrongLetters from './Hangman Build/WrongLetters';
 import Word from './Hangman Build/Word';
 import Popup from './Hangman Build/Popup';
 import Notification from './Hangman Build/Notification';
+import Hint from './Hangman Build/Hint';
 import { showNotification as show, checkWin } from './Hangman Build/Helpers';
 
 import './Hangman.css';
@@ -15,6 +16,7 @@ function Hangman({setGame}) {
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
   const [selectedWord, setSelectedWord] = useState(""); 
+  const [resetGame, setResetGame] = useState(false);
 
   useEffect(() => {
     fetch("nouns.txt")
@@ -55,10 +57,7 @@ function Hangman({setGame}) {
   }, [correctLetters, wrongLetters, playable]);
 
   function playAgain() {
-    setPlayable(true);
-
-    setCorrectLetters([]);
-    setWrongLetters([]);
+    setResetGame(true); 
 
     fetch("nouns.txt")
     .then(response => response.text())
@@ -70,6 +69,10 @@ function Hangman({setGame}) {
     .catch(error => {
       console.error("Error fetching the file:", error);
     });
+    setPlayable(true);
+
+    setCorrectLetters([]);
+    setWrongLetters([]);
   }
 
   return (
@@ -79,6 +82,7 @@ function Hangman({setGame}) {
         <Figure wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
+        <Hint selectedWord={selectedWord} correctLetters={correctLetters} resetGame={resetGame} setResetGame={setResetGame} />       
       </div>
       <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} />
       <Notification showNotification={showNotification} />

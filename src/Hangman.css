@@ -1,8 +1,4 @@
 /* Hangman-specific styles */
-h1 {
-  margin: 20px 0 0;
-}
-
 .hangman-container {
   padding: 20px 30px;
   position: relative;

@@ -75,7 +75,7 @@ function Hangman({setGame}) {
   return (
     <>
       <Header />
-      <div className="game-container">
+      <div className="hangman-container">
         <Figure wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />

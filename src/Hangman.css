@@ -1,4 +1,16 @@
 /* Hangman-specific styles */
+h1 {
+  margin: 20px 0 0;
+}
+
+.hangman-container {
+  padding: 20px 30px;
+  position: relative;
+  margin: auto;
+  height: 350px;
+  width: 450px;
+}
+
 .figure-container {
   fill: transparent;
   stroke: #000000;
@@ -13,7 +25,7 @@
 .wrong-letters-container {
   position: absolute;
   top: 50px;
-  right: 50px;
+  right: 20px;
   display: flex;
   flex-direction: column;
   text-align: right;

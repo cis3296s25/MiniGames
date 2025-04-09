@@ -17,13 +17,12 @@ function Hangman({setGame}) {
   const [selectedWord, setSelectedWord] = useState(""); 
 
   useEffect(() => {
-    // Fetch the words from the text file
     fetch("nouns.txt")
       .then(response => response.text())
       .then(text => {
-        const words = text.split(/\s+/); // Split by spaces or newlines
-        const randomWord = words[Math.floor(Math.random() * words.length)]; // Pick a random word
-        setSelectedWord(randomWord); // Set the random word in state
+        const words = text.split(/\s+/);
+        const randomWord = words[Math.floor(Math.random() * words.length)]; 
+        setSelectedWord(randomWord); 
       })
       .catch(error => {
         console.error("Error fetching the file:", error);
@@ -58,18 +57,15 @@ function Hangman({setGame}) {
   function playAgain() {
     setPlayable(true);
 
-    // Empty Arrays
     setCorrectLetters([]);
     setWrongLetters([]);
 
-    //const random = Math.floor(Math.random() * words.length);
-    //selectedWord = words[random];
     fetch("nouns.txt")
     .then(response => response.text())
     .then(text => {
       const words = text.split(/\s+/);
       const randomWord = words[Math.floor(Math.random() * words.length)];
-      setSelectedWord(randomWord); // Set the new random word
+      setSelectedWord(randomWord); 
     })
     .catch(error => {
       console.error("Error fetching the file:", error);

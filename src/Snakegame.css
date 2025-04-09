@@ -1,17 +1,17 @@
 
 .container {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .score {
-  color: #3498db;
-  font-size: 24px;
+  color: #000000;
+  font-size: 20px;
 }
 
 .high-score {
-  color: #e74c3c;
-  font-size: 18px;
+  color: #000000;
+  font-size: 16px;
 }
 
 .game-over {

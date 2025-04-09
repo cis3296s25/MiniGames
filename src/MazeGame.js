@@ -61,6 +61,7 @@ const App = () => {
       <div>
         <button onClick={startGame}>Start Game</button>
         <button onClick={resetGame} disabled={gameOver}>Restart Game</button>
+        <button className="back-button" onClick={() => setGame(null)}>Back to MiniGames</button>
         <div id="mazeCanvasContainer">
           <canvas ref={canvasRef} id="mazeCanvas" width="500" height="500"></canvas>
         </div>

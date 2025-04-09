@@ -9,14 +9,26 @@ import { showNotification as show, checkWin } from './Hangman Build/Helpers';
 
 import './Hangman.css';
 
-const words = ['application', 'programming', 'interface', 'wizard', 'hall', 'salt', 'cushion', 'scientific', 'partner', 'acrid', 'crowd', 'detail', 'subdue', 'needle', 'squirrel', 'unruly', 'narrow', 'preserve', 'clever', 'shave', 'rinse', 'nest', 'quarter', 'ripe', 'paddle', 'obedient', 'precious'];
-let selectedWord = words[Math.floor(Math.random() * words.length)];
-
 function Hangman({setGame}) {
   const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
+  const [selectedWord, setSelectedWord] = useState(""); 
+
+  useEffect(() => {
+    // Fetch the words from the text file
+    fetch("nouns.txt")
+      .then(response => response.text())
+      .then(text => {
+        const words = text.split(/\s+/); // Split by spaces or newlines
+        const randomWord = words[Math.floor(Math.random() * words.length)]; // Pick a random word
+        setSelectedWord(randomWord); // Set the random word in state
+      })
+      .catch(error => {
+        console.error("Error fetching the file:", error);
+      });
+  }, []);
 
   useEffect(() => {
     const handleKeydown = event => {
@@ -50,8 +62,18 @@ function Hangman({setGame}) {
     setCorrectLetters([]);
     setWrongLetters([]);
 
-    const random = Math.floor(Math.random() * words.length);
-    selectedWord = words[random];
+    //const random = Math.floor(Math.random() * words.length);
+    //selectedWord = words[random];
+    fetch("nouns.txt")
+    .then(response => response.text())
+    .then(text => {
+      const words = text.split(/\s+/);
+      const randomWord = words[Math.floor(Math.random() * words.length)];
+      setSelectedWord(randomWord); // Set the new random word
+    })
+    .catch(error => {
+      console.error("Error fetching the file:", error);
+    });
   }
 
   return (

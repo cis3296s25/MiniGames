@@ -5,6 +5,11 @@ import TicTacToe from "./TicTacToe";
 import SnakeGame from "./SnakeGame";
 import Hangman from "./Hangman"
 
+import tictactoephoto from "./tictactoe.png";
+import snakephoto from "./snake.png";
+import hangmanphoto from "./hangman.png";
+
+
 function App() {
   const [game, setGame] = useState(null);
 
@@ -27,14 +32,14 @@ function App() {
           <h1>MiniGames</h1>
           <button className="select-button" onClick={() => play_TicTacToe("ticTacToe")}>
             <div className="button-content">
-          <img src="/tictactoe.png" className="button-image"/>
+          <img src={tictactoephoto} className="button-image"/>
           <p>TicTacToe</p>
           </div>
           </button>
 
           <button className="select-button" onClick={() => play_Snake("snake")}>
             <div className="button-content">
-                <img src="/snake.png" className="button-image"/>
+                <img src={snakephoto} className="button-image"/>
               <p>Snake</p>
             </div>
           </button>
@@ -42,7 +47,7 @@ function App() {
 
           <button className="select-button" onClick={() => play_Hangman("hangman")}>
             <div className="button-content">
-              <img src="/hangman.png" className="button-image"/>
+              <img src={hangmanphoto} className="button-image"/>
               <p>Hangman</p>
             </div>
 

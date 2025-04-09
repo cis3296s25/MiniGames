@@ -5,6 +5,7 @@ import WrongLetters from './Hangman Build/WrongLetters';
 import Word from './Hangman Build/Word';
 import Popup from './Hangman Build/Popup';
 import Notification from './Hangman Build/Notification';
+import Hint from './Hangman Build/Hint';
 import { showNotification as show, checkWin } from './Hangman Build/Helpers';
 
 import './Hangman.css';
@@ -15,15 +16,15 @@ function Hangman({setGame}) {
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
   const [selectedWord, setSelectedWord] = useState(""); 
+  const [resetGame, setResetGame] = useState(false);
 
   useEffect(() => {
-    // Fetch the words from the text file
     fetch("nouns.txt")
       .then(response => response.text())
       .then(text => {
-        const words = text.split(/\s+/); // Split by spaces or newlines
-        const randomWord = words[Math.floor(Math.random() * words.length)]; // Pick a random word
-        setSelectedWord(randomWord); // Set the random word in state
+        const words = text.split(/\s+/);
+        const randomWord = words[Math.floor(Math.random() * words.length)]; 
+        setSelectedWord(randomWord); 
       })
       .catch(error => {
         console.error("Error fetching the file:", error);
@@ -56,33 +57,32 @@ function Hangman({setGame}) {
   }, [correctLetters, wrongLetters, playable]);
 
   function playAgain() {
-    setPlayable(true);
+    setResetGame(true); 
 
-    // Empty Arrays
-    setCorrectLetters([]);
-    setWrongLetters([]);
-
-    //const random = Math.floor(Math.random() * words.length);
-    //selectedWord = words[random];
     fetch("nouns.txt")
     .then(response => response.text())
     .then(text => {
       const words = text.split(/\s+/);
       const randomWord = words[Math.floor(Math.random() * words.length)];
-      setSelectedWord(randomWord); // Set the new random word
+      setSelectedWord(randomWord); 
     })
     .catch(error => {
       console.error("Error fetching the file:", error);
     });
+    setPlayable(true);
+
+    setCorrectLetters([]);
+    setWrongLetters([]);
   }
 
   return (
     <>
       <Header />
-      <div className="game-container">
+      <div className="hangman-container">
         <Figure wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
+        <Hint selectedWord={selectedWord} correctLetters={correctLetters} resetGame={resetGame} setResetGame={setResetGame} />       
       </div>
       <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} />
       <Notification showNotification={showNotification} />

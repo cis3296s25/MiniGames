@@ -33,6 +33,18 @@ const Figure = ({ wrongLetters }) => {
       {errors > 5 &&
         <line x1="140" y1="150" x2="160" y2="180" />
       }
+      {/* <!-- Eyes --> */}
+      {errors > 6 &&
+        <circle cx="134" cy="65" r="2" />
+      }
+      {errors > 7 &&
+        <circle cx="147" cy="65" r="2" />
+      }
+      {/* <!-- Mouth --> */}
+      {errors > 8 &&
+        <polyline points="135,80 140,75
+                    145,80" />      
+      }
     </svg>
   )
 }

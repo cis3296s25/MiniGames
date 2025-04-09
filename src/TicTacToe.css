@@ -26,13 +26,13 @@
   text-align: center;
   line-height: 100px;  
   border: 2px solid #333;
-  background-color: #fe0707;
+  background-color: #f87e7e;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
 }
 
 .cell:hover {
-  background-color: #ff0000;
+  background-color: #f87e7e;
   transform: scale(1.1);
 }
 

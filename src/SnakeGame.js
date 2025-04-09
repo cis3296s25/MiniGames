@@ -218,18 +218,20 @@ const GameState = ({setGame}) => {
 
   return (
     <div className="game-container">
+      <h2>Snake</h2>
+      {!gameOver && (
       <div className="instructions">
         <h3>How to Play</h3>
         <p>To start, press any arrow key</p>
         <p>Eat apples for snake to grow</p>
         <p>Don't hit the wall or eat yourself</p>
-      </div>
+      </div> )}
       <p className="score">Score: {score}</p>
       <p className="high-score">High Score: {highScore}</p>
       <button className="back-button" onClick={() => setGame(null)}>Back to MiniGames</button>
       {gameOver && (
         <div className="game-over">
-          <p>Game Over! {collisionType === "wall" ? "You Hit the wall" : "You Ate yourself"}!</p>
+          <p>Game Over! {collisionType === "wall" ? "You hit the wall" : "You ate yourself"}!</p>
           <p>Press Enter to reset the game.</p>
         </div>
       )}

@@ -38,7 +38,7 @@
 .word {
   display: flex;
   position: absolute;
-  bottom: 5px;
+  bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
 }

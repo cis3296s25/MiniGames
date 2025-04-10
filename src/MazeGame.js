@@ -5,7 +5,7 @@ import './MazeGame.css';
 import './key.png';
 import './home.png';
 
-const App = () => {
+const MazeGame = () => {
   const [maze, setMaze] = useState(null);
   const [sprite, setSprite] = useState(null);
   const [finishSprite, setFinishSprite] = useState(null);
@@ -91,4 +91,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default MazeGame;

@@ -1,40 +1,74 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
+const CELL_SIZE = 500; // canvas width in px
 const Player = ({ maze, sprite, finishSprite, setGameOver, setWinMessage, moves, setMoves }) => {
-  const [position, setPosition] = React.useState(maze.getStartCoord());
+  const canvas = document.getElementById('mazeCanvas');
+  const ctx = canvas?.getContext('2d');
+  const [position, setPosition] = useState(maze.getStartCoord());
+
+  const draw = (x, y) => {
+    if (!ctx || !sprite || !finishSprite || !maze) return;
+
+    const cellSize = CELL_SIZE / maze.getMap().length;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    maze.drawMaze(ctx);
+
+    // Draw goal
+    const end = maze.getEndCoord();
+    ctx.drawImage(finishSprite, end.x * cellSize, end.y * cellSize, cellSize, cellSize);
+
+    // Draw player
+    ctx.drawImage(sprite, x * cellSize, y * cellSize, cellSize, cellSize);
+  };
+
+  useEffect(() => {
+    draw(position.x, position.y);
+  }, [position, sprite, finishSprite, maze]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      const newPosition = { ...position };
-      const { x, y } = position;
-
-      // Handle movement based on key codes
-      if (event.keyCode === 37) newPosition.x = x - 1; // left
-      if (event.keyCode === 38) newPosition.y = y - 1; // up
-      if (event.keyCode === 39) newPosition.x = x + 1; // right
-      if (event.keyCode === 40) newPosition.y = y + 1; // down
-
-      // Check for valid movement (within bounds and not a wall)
-      if (maze.getMap()[newPosition.y] && maze.getMap()[newPosition.y][newPosition.x]) {
-        const cell = maze.getMap()[newPosition.y][newPosition.x];
-        if (cell) {
-          setPosition(newPosition);
-          setMoves((prev) => prev + 1);  // Increment the move count
-
-          // Check if player reached the end
-          if (newPosition.x === maze.getEndCoord().x && newPosition.y === maze.getEndCoord().y) {
-            setGameOver(true);
-            setWinMessage(`You won the game in ${moves + 1} moves!`);
-          }
+        const { x, y } = position;
+        const map = maze.getMap();
+        const cell = map[y][x];
+        let newX = x;
+        let newY = y;
+      
+        if (event.key === 'ArrowLeft' && cell.w) {
+          newX = x - 1;
         }
-      }
-    };
+        if (event.key === 'ArrowUp' && cell.n) {
+          newY = y - 1;
+        }
+        if (event.key === 'ArrowRight' && cell.e) {
+          newX = x + 1;
+        }
+        if (event.key === 'ArrowDown' && cell.s) {
+          newY = y + 1;
+        }
+      
+        if (newX !== x || newY !== y) {
+          setPosition({ x: newX, y: newY });
+          setMoves((prev) => {
+            const updated = prev + 1;
+      
+            if (
+              newX === maze.getEndCoord().x &&
+              newY === maze.getEndCoord().y
+            ) {
+              setGameOver(true);
+              setWinMessage(`You won the game in ${updated} moves!`);
+            }
+      
+            return updated;
+          });
+        }
+      };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [position, maze, moves, setMoves, setGameOver, setWinMessage]);
+  }, [position, maze, setMoves, setGameOver, setWinMessage]);
 
-  return <></>;
+  return null;
 };
 
 export default Player;

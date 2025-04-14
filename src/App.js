@@ -9,6 +9,7 @@ import MazeGame from "./MazeGame"
 import tictactoephoto from "./tictactoe.png";
 import snakephoto from "./snake.png";
 import hangmanphoto from "./hangman.png";
+import mazephoto from "./maze.png";
 
 
 function App() {
@@ -54,7 +55,12 @@ function App() {
           <p>Hangman</p>
             </div>
           </button>
-          <button className="select-button" onClick={() => play_MazeGame("mazegame")}>Maze</button>
+          <button className="select-button" onClick={() => play_MazeGame("mazegame")}>
+            <div className="button-content">
+              <img src={mazephoto} className="button-image"/>
+              <p>Maze</p>
+            </div>
+          </button>
 
         </div>
       ) : game === 'ticTacToe' ? (

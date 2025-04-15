@@ -5,7 +5,7 @@ import './MazeGame.css';
 import keyImage from './key.png';
 import homeImage from './home.png';
 
-const MazeGame = () => {
+const MazeGame = ({setGame}) => {
   const [maze, setMaze] = useState(null);
   const [sprite, setSprite] = useState(null);
   const [finishSprite, setFinishSprite] = useState(null);
@@ -55,6 +55,7 @@ const MazeGame = () => {
   return (
     <div className="App">
       <h1>Maze Game</h1>
+      <button className="back-button" onClick={() => setGame(null)}>Back to MiniGames</button>
       <div>
         <button onClick={startGame}>Start Game</button>
         <button onClick={resetGame} disabled={gameOver}>Restart Game</button>

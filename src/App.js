@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import TicTacToe from "./TicTacToe";
 import SnakeGame from "./SnakeGame";
 import Hangman from "./Hangman";
@@ -10,10 +10,21 @@ import tictactoephoto from "./tictactoe.png";
 import snakephoto from "./snake.png";
 import hangmanphoto from "./hangman.png";
 import mazephoto from "./maze.png";
+import splashImage from './mg.png';
 
 
 function App() {
   const [game, setGame] = useState(null);
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout (() => {
+      setShowSplash(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+    }, []);
+
+
 
   const play_TicTacToe = (string) => {
     setGame(string);
@@ -29,6 +40,15 @@ function App() {
   
   const play_MazeGame = (string) => {
     setGame(string);
+  }
+
+  if (showSplash) {
+    return (
+        <div className="splash-screen">
+          <img src={splashImage} alt="MiniGames Splash" className="splash-image" />
+
+        </div>
+    );
   }
 
   return (

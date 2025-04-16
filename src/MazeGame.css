@@ -2,29 +2,57 @@
 
 html, body {
     width: 100vw;
-    height: 100vh;
-    position: fixed;
-    padding: 0;
-    margin: 0;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #fff;
+    height: 100vh; 
+    background-color: #f4f4f4;
     font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#mazeContainer {
-    width: 80%;
-    height: 80%;
-    margin: auto;
-    border-radius: 10px;
-    overflow: hidden;
+#page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    width: 100%;
+    height: 100%;
+    text-align: center;
     position: relative;
+    padding: 0; 
+}
+
+#page #menu {
+    padding: 10px;
+    height: 65px;
+}
+
+#page #menu h1 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 3.2rem;
+}
+
+#page #view {
+    width: 100%;
+    height: calc(100% - 65px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mazeContainer {
+    width: 80vw;
+    height: 80vh;
     background-color: #f1f1f1;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%; 
+    max-height: 100%; 
+    margin-right: 20px;
 }
 
 #mazeCanvas {
@@ -32,13 +60,11 @@ html, body {
     height: 100%;
     border: 2px solid black;
     display: block;
-    margin: 0;
-    position: relative;
 }
 
 input, select {
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.30);
+    background-color: rgba(0, 0, 0, 0.3);
     height: 45px;
     width: 150px;
     padding: 10px;
@@ -51,7 +77,7 @@ input, select {
 }
 
 input:hover, select:hover {
-    background-color: rgba(0, 0, 0, 0.70);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 input:active, select:active {
@@ -72,13 +98,12 @@ input:focus, select:focus {
 
 #Message-Container {
     visibility: hidden;
-    color: white;
-    width: 100vw;
-    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.30);
+    width: 100vw;
+    height: 100vh; 
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -93,61 +118,100 @@ input:focus, select:focus {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    position: relative;
 }
 
-button {
-    background-color: #007bff;
+.controls {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 7px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease-in-out;
+}
+
+
+.controls:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.controls button {
+    transition: transform 0.3s ease;
+}
+
+.controls button:hover {
+    transform: scale(1.05);
+}
+
+.difficulty-select {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: black;
+    font-weight: bold;
+}
+
+
+.button {
+    background: linear-gradient(135deg, #0056b3, #0056b3);
     border: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 12px 24px;
+    border-radius: 8px;
     font-size: 16px;
-}
-
-button:disabled {
-    background-color: #ccc;
-}
-
-#page {
-    text-align: center;
-}
-
-#page #menu {
-    margin: auto;
-    padding: 10px;
-    height: 65px;
-    box-sizing: border-box;
-}
-
-#page #menu h1 {
-    margin: 0;
-    margin-bottom: 10px;
     font-weight: 600;
-    font-size: 3.2rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+    backdrop-filter: blur(4px);
 }
 
-#page #view {
+.button:hover {
+    background: linear-gradient(135deg, #ff0000, #004494);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+}
+
+.button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.instructions {
+    background-color: #e9eced;
+    padding: 15px;
+    border-radius: 8px;
+    width: 300px;
     position: absolute;
-    top: 65px;
-    left: 0;
-    right: 0;
-    width: 100%;
+    top: 20px;
+    right: 20px;
+    border: 3px solid #bdc3d9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    text-align: left;
 }
 
-.border {
-    border: 10px solid black;
-    border-radius: 10px;
+.instructions h2 {
+    margin-bottom: 10px;
 }
 
-#instructions {
-    margin-top: 425px;
+.instructions p {
+    margin: 5px 0;
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 600px) {
     input, select {
         width: 120px;
+    }
+
+    #mazeContainer {
+        width: 95vw;
+        height: 70vh;
     }
 }

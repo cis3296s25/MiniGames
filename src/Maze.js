@@ -65,24 +65,27 @@ class Maze {
     let cellsVisited = 1;
     let numLoops = 0;
     let maxLoops = 0;
-    let pos = { ...this.startCoord }; // Fixed start position
+    let pos = { ...this.startCoord };
     const numCells = this.width * this.height;
-
+  
     while (!isComp) {
       move = false;
       this.map[pos.y][pos.x].visited = true;
-
+  
       if (numLoops >= maxLoops) {
-        maxLoops = Math.round(this.rand(this.height / 8));
+        maxLoops = Math.max(1, Math.round(this.rand(this.height / 8)));
         numLoops = 0;
       }
       numLoops++;
-
-      for (let index = 0; index < this.dirs.length; index++) {
-        const direction = this.dirs[index];
+  
+      // 🔄 Shuffle directions before exploring
+      const shuffledDirs = this.shuffle([...this.dirs]);
+  
+      for (let index = 0; index < shuffledDirs.length; index++) {
+        const direction = shuffledDirs[index];
         const nx = pos.x + this.modDir[direction].x;
         const ny = pos.y + this.modDir[direction].y;
-
+  
         if (nx >= 0 && nx < this.width && ny >= 0 && ny < this.height) {
           if (!this.map[ny][nx].visited) {
             this.map[pos.y][pos.x][direction] = true;
@@ -95,15 +98,27 @@ class Maze {
           }
         }
       }
-
+  
       if (!move) {
-        pos = this.map[pos.y][pos.x].priorPos;
+        if (this.map[pos.y][pos.x].priorPos) {
+          pos = this.map[pos.y][pos.x].priorPos;
+        } else {
+          break; // should not happen unless something went wrong
+        }
       }
-
+  
       if (cellsVisited === numCells) {
         isComp = true;
       }
     }
+  }
+  
+  shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
   }
 
   getMap() {

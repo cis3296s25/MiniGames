@@ -51,13 +51,24 @@ const MazeGame = ({setGame}) => {
   const resetGame = () => {
     startGame();
   };
-
+  
   return (
     <div className="App">
       <h1>Maze Game</h1>
       <button className="back-button" onClick={() => setGame(null)}>
         Back to MiniGames
       </button>
+      
+      
+        <div className="instructions">
+          <h2>How to Play:</h2>
+          <p>1. Use the arrow keys to move the key (represented by the sprite) around the maze.</p>
+          <p>2. Your goal is to reach the home (represented by the finish sprite) while avoiding walls.</p>
+          <p>3. The number of moves is tracked at the top right corner.</p>
+          <p>4. The game ends when you reach the home. Try to complete the maze with as few moves as possible!</p>
+          <p>5. You can only choose the Difficulty of the maze after restarting the game.</p>
+        </div>
+         
       <div className="controls">
         <div className="button">
           <button onClick={startGame}>Restart Game</button>

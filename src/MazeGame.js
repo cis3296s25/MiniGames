@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import Maze from './Maze';
 import Player from './Player';
 import './MazeGame.css';
-import './key.png';
-import './home.png';
+import keyImage from './key.png';
+import homeImage from './home.png';
 
-const App = () => {
+const MazeGame = ({setGame}) => {
   const [maze, setMaze] = useState(null);
   const [sprite, setSprite] = useState(null);
   const [finishSprite, setFinishSprite] = useState(null);
@@ -19,11 +19,11 @@ const App = () => {
   useEffect(() => {
     const loadSprites = () => {
       const spriteImg = new Image();
-      spriteImg.src = '/key.png';
+      spriteImg.src = keyImage;
       spriteImg.onload = () => setSprite(spriteImg);
 
       const finishImg = new Image();
-      finishImg.src = '/home.png';
+      finishImg.src = homeImage;
       finishImg.onload = () => setFinishSprite(finishImg);
     };
 
@@ -37,9 +37,6 @@ const App = () => {
     if (sprite && finishSprite) {
       const newMaze = new Maze(difficulty, difficulty);
       setMaze(newMaze);
-
-      const newPlayer = new Player(newMaze, sprite, finishSprite, setGameOver, setWinMessage, setMoves);
-      // Player component isn't directly used in App; we're just passing the parameters here
 
       const ctx = canvasRef.current.getContext('2d');
       ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
@@ -58,13 +55,15 @@ const App = () => {
   return (
     <div className="App">
       <h1>Maze Game</h1>
+      <button className="back-button" onClick={() => setGame(null)}>Back to MiniGames</button>
       <div>
         <button onClick={startGame}>Start Game</button>
         <button onClick={resetGame} disabled={gameOver}>Restart Game</button>
-        
+
         <div id="mazeCanvasContainer">
           <canvas ref={canvasRef} id="mazeCanvas" width="500" height="500"></canvas>
         </div>
+
         <div>
           <label htmlFor="difficulty">Select Difficulty: </label>
           <select
@@ -78,6 +77,19 @@ const App = () => {
             <option value={15}>15x15</option>
           </select>
         </div>
+
+        {maze && sprite && finishSprite && (
+          <Player
+            maze={maze}
+            sprite={sprite}
+            finishSprite={finishSprite}
+            setGameOver={setGameOver}
+            setWinMessage={setWinMessage}
+            moves={moves}
+            setMoves={setMoves}
+          />
+        )}
+
         {gameOver && (
           <div id="Message-Container">
             <div id="message">
@@ -91,4 +103,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default MazeGame;

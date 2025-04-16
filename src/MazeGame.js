@@ -51,26 +51,39 @@ const MazeGame = ({setGame}) => {
   const resetGame = () => {
     startGame();
   };
-
+  
   return (
     <div className="App">
       <h1>Maze Game</h1>
-      <button className="back-button" onClick={() => setGame(null)}>Back to MiniGames</button>
-      <div>
-        <button onClick={startGame}>Start Game</button>
-        <button onClick={resetGame} disabled={gameOver}>Restart Game</button>
-
-        <div id="mazeCanvasContainer">
-          <canvas ref={canvasRef} id="mazeCanvas" width="500" height="500"></canvas>
+      <button className="back-button" onClick={() => setGame(null)}>
+        Back to MiniGames
+      </button>
+      
+      
+        <div className="instructions">
+          <h2>How to Play:</h2>
+          <p>1. Use the arrow keys to move the key (represented by the sprite) around the maze.</p>
+          <p>2. Your goal is to reach the home (represented by the finish sprite) while avoiding walls.</p>
+          <p>3. The number of moves is tracked at the top right corner.</p>
+          <p>4. The game ends when you reach the home. Try to complete the maze with as few moves as possible!</p>
+          <p>5. You can only choose the Difficulty of the maze after restarting the game.</p>
         </div>
+         
+      <div className="controls">
+        <div className="button">
+          <button onClick={startGame}>Restart Game</button>
+          <button onClick={resetGame} disabled={gameOver}>Generate Maze</button>
+        </div>
+        
+        
 
-        <div>
-          <label htmlFor="difficulty">Select Difficulty: </label>
+        <div className="difficulty-select">
+          <label htmlFor="difficulty">Difficulty: </label>
           <select
             id="difficulty"
             value={difficulty}
             onChange={(e) => setDifficulty(Number(e.target.value))}
-            disabled={gameOver}
+            disabled={gameOver} 
           >
             <option value={5}>5x5</option>
             <option value={10}>10x10</option>
@@ -78,29 +91,42 @@ const MazeGame = ({setGame}) => {
           </select>
         </div>
 
-        {maze && sprite && finishSprite && (
-          <Player
-            maze={maze}
-            sprite={sprite}
-            finishSprite={finishSprite}
-            setGameOver={setGameOver}
-            setWinMessage={setWinMessage}
-            moves={moves}
-            setMoves={setMoves}
-          />
-        )}
-
-        {gameOver && (
-          <div id="Message-Container">
-            <div id="message">
-              <h2>{winMessage}</h2>
-              <button onClick={resetGame}>Play Again</button>
-            </div>
-          </div>
-        )}
+        <div className="move-counter">
+        <p>
+          Moves: <strong>{moves}</strong>
+        </p>
+        </div>
       </div>
+
+      
+
+      <div id="mazeCanvasContainer">
+        <canvas ref={canvasRef} id="mazeCanvas" width="500" height="500"></canvas>
+      </div>
+
+      {maze && sprite && finishSprite && (
+        <Player
+          maze={maze}
+          sprite={sprite}
+          finishSprite={finishSprite}
+          setGameOver={setGameOver}
+          setWinMessage={setWinMessage}
+          moves={moves}
+          setMoves={setMoves}
+        />
+      )}
+
+      {gameOver && (
+        <div id="Message-Container">
+          <div id="message">
+            <h2>{winMessage}</h2>
+            <button onClick={resetGame}>Play Again</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
 
 export default MazeGame;

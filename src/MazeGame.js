@@ -55,22 +55,24 @@ const MazeGame = ({setGame}) => {
   return (
     <div className="App">
       <h1>Maze Game</h1>
-      <button className="back-button" onClick={() => setGame(null)}>Back to MiniGames</button>
-      <div>
-        <button onClick={startGame}>Start Game</button>
-        <button onClick={resetGame} disabled={gameOver}>Restart Game</button>
-
-        <div id="mazeCanvasContainer">
-          <canvas ref={canvasRef} id="mazeCanvas" width="500" height="500"></canvas>
+      <button className="back-button" onClick={() => setGame(null)}>
+        Back to MiniGames
+      </button>
+      <div className="controls">
+        <div className="button">
+          <button onClick={startGame}>Restart Game</button>
+          <button onClick={resetGame} disabled={gameOver}>Generate Maze</button>
         </div>
+        
+        
 
-        <div>
-          <label htmlFor="difficulty">Select Difficulty: </label>
+        <div className="difficulty-select">
+          <label htmlFor="difficulty">Difficulty: </label>
           <select
             id="difficulty"
             value={difficulty}
             onChange={(e) => setDifficulty(Number(e.target.value))}
-            disabled={gameOver}
+            disabled={gameOver} 
           >
             <option value={5}>5x5</option>
             <option value={10}>10x10</option>
@@ -78,29 +80,42 @@ const MazeGame = ({setGame}) => {
           </select>
         </div>
 
-        {maze && sprite && finishSprite && (
-          <Player
-            maze={maze}
-            sprite={sprite}
-            finishSprite={finishSprite}
-            setGameOver={setGameOver}
-            setWinMessage={setWinMessage}
-            moves={moves}
-            setMoves={setMoves}
-          />
-        )}
-
-        {gameOver && (
-          <div id="Message-Container">
-            <div id="message">
-              <h2>{winMessage}</h2>
-              <button onClick={resetGame}>Play Again</button>
-            </div>
-          </div>
-        )}
+        <div className="move-counter">
+        <p>
+          Moves: <strong>{moves}</strong>
+        </p>
+        </div>
       </div>
+
+      
+
+      <div id="mazeCanvasContainer">
+        <canvas ref={canvasRef} id="mazeCanvas" width="500" height="500"></canvas>
+      </div>
+
+      {maze && sprite && finishSprite && (
+        <Player
+          maze={maze}
+          sprite={sprite}
+          finishSprite={finishSprite}
+          setGameOver={setGameOver}
+          setWinMessage={setWinMessage}
+          moves={moves}
+          setMoves={setMoves}
+        />
+      )}
+
+      {gameOver && (
+        <div id="Message-Container">
+          <div id="message">
+            <h2>{winMessage}</h2>
+            <button onClick={resetGame}>Play Again</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
 
 export default MazeGame;

@@ -1,13 +1,20 @@
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;  
-  padding: 0; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  height: 100vh;
-  background-color: #f4f4f4; 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  
+    height: 100dvh;
+    
 }
+  
 
 .App {
   text-align: center;
@@ -27,7 +34,9 @@ body {
 }
 
 .select-button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #ff0000, #004494); /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift */
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
 }
 
 .back-button {
@@ -44,8 +53,10 @@ body {
 
 
 .back-button:hover {
+  background: linear-gradient(135deg, #03721b, #004494);
   background-color: #3ea32d;
-
+  transform: translateY(-5px); 
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 h1 {

@@ -7,7 +7,6 @@ import Popup from './Hangman Build/Popup';
 import Notification from './Hangman Build/Notification';
 import Hint from './Hangman Build/Hint';
 import { showNotification as show, checkWin } from './Hangman Build/Helpers';
-import MultiplayerPopup from './Hangman Build/Multiplayer';
 
 import './Hangman.css';
 
@@ -18,7 +17,6 @@ function Hangman({setGame}) {
   const [showNotification, setShowNotification] = useState(false);
   const [selectedWord, setSelectedWord] = useState(""); 
   const [resetGame, setResetGame] = useState(false);
-  const [showMultiplayerPopup, setShowMultiplayerPopup] = useState(true);
 
   useEffect(() => {
     fetch("nouns.txt")
@@ -81,7 +79,6 @@ function Hangman({setGame}) {
     <>
       <Header />
       <div className="hangman-container">
-        {showMultiplayerPopup && <MultiplayerPopup setShowMultiplayerPopup={setShowMultiplayerPopup}/> }
         <Figure wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
         <Hint selectedWord={selectedWord} correctLetters={correctLetters} resetGame={resetGame} setResetGame={setResetGame} />       

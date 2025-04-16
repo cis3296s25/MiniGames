@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from './Hangman Build/Header';
 import Figure from './Hangman Build/Figure';
 import WrongLetters from './Hangman Build/WrongLetters';
@@ -31,30 +31,31 @@ function Hangman({setGame}) {
       });
   }, []);
 
-  useEffect(() => {
-    const handleKeydown = event => {
-      const { key, keyCode } = event;
-      if (playable && keyCode >= 65 && keyCode <= 90) {
-        const letter = key.toLowerCase();
-        if (selectedWord.includes(letter)) {
-          if (!correctLetters.includes(letter)) {
-            setCorrectLetters(currentLetters => [...currentLetters, letter]);
-          } else {
-            show(setShowNotification);
-          }
-        } else {
-          if (!wrongLetters.includes(letter)) {
-            setWrongLetters(currentLetters => [...currentLetters, letter]);
-          } else {
-            show(setShowNotification);
-          }
-        }
+
+  const handleKeydown = useCallback((event) => {
+    const { key, keyCode } = event;
+    if (playable && keyCode >= 65 && keyCode <= 90) {
+      const letter = key.toLowerCase();
+      if (selectedWord.includes(letter)) {
+        setCorrectLetters(prev => {
+          if (!prev.includes(letter)) return [...prev, letter];
+          show(setShowNotification);
+          return prev;
+        });
+      } else {
+        setWrongLetters(prev => {
+          if (!prev.includes(letter)) return [...prev, letter];
+          show(setShowNotification);
+          return prev;
+        });
       }
     }
+  }, [playable, selectedWord]); // only depend on things that are needed
+  
+  useEffect(() => {
     window.addEventListener('keydown', handleKeydown);
-
     return () => window.removeEventListener('keydown', handleKeydown);
-  }, [correctLetters, wrongLetters, playable]);
+  }, [handleKeydown]);
 
   function playAgain() {
     setResetGame(true); 

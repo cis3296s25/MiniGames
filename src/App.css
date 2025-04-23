@@ -1,5 +1,8 @@
 
 body {
+  background: linear-gradient(to right, #9bc8e6, #e8bbb6);
+}
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -14,13 +17,20 @@ body {
     height: 100dvh;
     
 }
-  
 
+
+ 
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+/* centers "minigames header */
 .App {
   text-align: center;
 }
 
-
+/* creates blue borders around game buttons */
 .select-button {
   padding: 10px;
   font-size: 16px;
@@ -33,12 +43,14 @@ body {
   transition: background-color 0.3s ease;
 }
 
+/* adds hover animation */
 .select-button:hover {
   background: linear-gradient(135deg, #ff0000, #004494); /* Darker blue on hover */
   transform: translateY(-2px); /* Slight lift */
   box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
 }
 
+/* adds cosmetics to back button */
 .back-button {
   padding: 10px;
   font-size: 16px;
@@ -51,7 +63,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-
+/* back button animation */
 .back-button:hover {
   background: linear-gradient(135deg, #03721b, #004494);
   background-color: #3ea32d;
@@ -59,21 +71,19 @@ body {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
+/* sets button images to fixed size */
 .button-image {
   width: 100px;
   height: 100px;
   object-fit: cover;
 }
 
+/* sets button text to white */
 .button-content p {
   color: white;
 }
 
+/* set splash window */
 .splash-screen {
   display: flex;
   top: 0;
@@ -82,8 +92,10 @@ h1 {
   height: 100%
 }
 
+/* set splash size */
 .splash-image {
   max-width: 100%;
   max-height: 100%;
+  /* prevent image from stretching to fit splash screen dimensions */
   object-fit: contain;
 }

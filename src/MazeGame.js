@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Maze from './Maze';
 import Player from './Player';
 import './MazeGame.css';
-import keyImage from './key.png';
-import homeImage from './home.png';
+import keyImage from './Images/key.png';
+import homeImage from './Images/home.png';
 
 const MazeGame = ({ setGame }) => {
   const [maze, setMaze] = useState(null);

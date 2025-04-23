@@ -5,11 +5,11 @@ import SnakeGame from "./SnakeGame";
 import Hangman from "./Hangman";
 import MazeGame from "./MazeGame"
 
-import tictactoephoto from "./tictactoe.png";
-import snakephoto from "./snake.png";
-import hangmanphoto from "./hangman.png";
-import mazephoto from "./maze.png";
-import splashImage from './mg.png';
+import tictactoephoto from "./Images/tictactoe.png";
+import snakephoto from "./Images/snake.png";
+import hangmanphoto from "./Images/hangman.png";
+import mazephoto from "./Images/maze.png";
+import splashImage from './Images/mg.png';
 
 
 function App() {
